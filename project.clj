@@ -1,6 +1,6 @@
 (defproject hirelingtest "0.1.0-SNAPSHOT"
   :description "Test environment for the hireling library."
-  :url "http://example.com/FIXME"
+  :url "https://github.com/Zaphodious/hirelingtest"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
@@ -11,7 +11,8 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
                  [org.clojure/core.async  "0.4.474"]
-                 [rum "0.11.2"]]
+                 [rum "0.11.2"]
+                 [hireling "0.1.0-SNAPSHOT"]]
 
   :plugins [[lein-figwheel "0.5.15"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
