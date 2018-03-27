@@ -43,14 +43,13 @@
                            :preloads [devtools.preload]}}
                {:id "hireling-dev"
                 :source-paths ["hireling"]
-                :figwheel {:on-jsload "hirelingtest.hireling/reload-hook"}
                 :compiler {:asset-path "js/compiled/hireling/out"
                            :output-to "resources/public/hireling.js"
                            :output-dir "resources/public/js/compiled/hireling/out"
                            :main hirelingtest.hireling
                            :target :webworker
                            :source-map-timestamp true
-                           :preloads [devtools.preload]}}
+                           :optimizations :advanced}}
                {:id "hireling-min"
                 :source-paths ["hireling"]
                 :compiler {:output-to "resources/public/hireling.js"
@@ -122,4 +121,10 @@
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
                    ;; need to add the compliled assets to the :clean-targets
                    :clean-targets ^{:protect false} ["resources/public/js/compiled"
-                                                     :target-path]}})
+                                                     :target-path]}
+             :hireling {:dependencies []
+                    ;; need to add dev source path here to get user.clj loaded
+                        :source-paths ["hireling"]
+                        ;; need to add the compliled assets to the :clean-targets
+                        :clean-targets ^{:protect false} ["resources/public/hireling.js"
+                                                          :target-path]}})
