@@ -9,7 +9,7 @@
   :min-lein-version "2.7.1"
 
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.9.946"]
+                 [org.clojure/clojurescript "1.10.238"]
                  [org.clojure/core.async  "0.4.474"]
                  [rum "0.11.2"]
                  [hireling "0.1.0-SNAPSHOT"]]
@@ -41,6 +41,24 @@
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools
                            :preloads [devtools.preload]}}
+               {:id "hireling-dev"
+                :source-paths ["hireling"]
+                :figwheel {:on-jsload "hirelingtest.hireling/reload-hook"}
+                :compiler {:asset-path "js/compiled/hireling/out"
+                           :output-to "resources/public/hireling.js"
+                           :output-dir "resources/public/js/compiled/hireling/out"
+                           :main hirelingtest.hireling
+                           :target :webworker
+                           :source-map-timestamp true
+                           :preloads [devtools.preload]}}
+               {:id "hireling-min"
+                :source-paths ["hireling"]
+                :compiler {:output-to "resources/public/hireling.js"
+                           :output-dir "resources/public/js/hireling/out"
+                           :main hirelingtest.hireling
+                           :target :webworker
+                           :optimizations :advanced
+                           :pretty-print false}}
                ;; This next build is a compressed minified build for
                ;; production. You can build this with:
                ;; lein cljsbuild once min
@@ -98,7 +116,7 @@
                                   [figwheel-sidecar "0.5.15"]
                                   [com.cemerick/piggieback "0.2.2"]]
                    ;; need to add dev source path here to get user.clj loaded
-                   :source-paths ["src" "dev"]
+                   :source-paths ["src" "dev" "hireling"]
                    ;; for CIDER
                    ;; :plugins [[cider/cider-nrepl "0.12.0"]]
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
